@@ -4,9 +4,6 @@ const escrevenapagina = (texto) => {
     document.body.innerHTML += texto + "<br>";
   };
 
-const quebralinha = () => {
-    document.body.innerHTML +=  "<br>";
-}
 
  escrevenapagina("<h4>NULLISH COALESING OPERATOR</h4>");
 //1. retorna null pra quando n tem valores significativos
@@ -256,4 +253,103 @@ const soma = array.reduce((acc, item) => {
 },0 ) // aqui passa o valor que o novo array deve começar (o tal do acumulator)
 
 escrevenapagina("<h4>TEMPLATE LITERALS</h4>");
-//7. 
+//7. permite a criação de strings de forma mais fácil e intuitiva. interpola os valores de variáveis diretamente na string.
+
+// str normal:
+/* const nomeUser = 'usuario(a)';
+const mensagem = 'Bem vindo(a)' + nomeUser + '!';
+escrevenapagina(mensagem) */
+
+// TL: coloca condições de existencia na propria string
+// lembrando: 
+// <var>??<msg> -> é nulo, se sim... <exibe mensagem>
+// <var> ? <var> : <msg> -> existe? se sim... <exibe o valor> se nao... <exibe mensagem>
+const nomeUser = null;
+const mensagem = `Bem vindo ${nomeUser ?? 'Usuario(a)'}!`;
+escrevenapagina(mensagem);
+
+escrevenapagina("<h4>Promises</h4>");
+// 8.  é uma promessa de que algo será concluído no futuro. 
+// Por exemplo, abaixo prometemos que a função soma2 será executada corretamente ou nao
+
+// métodos: 
+    //.then -> busca o valor da soma
+    //.catch ->  trata qualquer erro que ocorra durante a requisição.
+    //.finally -> método que vai ser executado independente se deu certo ou errado. Será executado no final da promise ser executada.
+
+// também dá pra criar uma promise
+    // resolve: função indicando que deu tudo certo
+    // reject: deu ruim
+
+//para mostrar que isso é assíncrono: 
+//settimeout -> usada para atrasar a execução de um trecho de código, recebe 2 parametros:
+// a função a ser executada, e seu tempo de espera
+
+// aqui, chamamos a função soma2 passando dois parametros, e retornando uma promessa de que isso vai ser resolvido ou n
+// essa promessa demora dois segundos para resolver, e então retorna a soma de dois numeros.
+const soma2 = (a, b) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve (a+b);
+        }, 2000);
+    });
+};
+// na chamada da função, usamos o método .then para buscar o resultado da soma dos números e exibe eles na tela.
+soma2(1, 3)
+    .then(soma => {
+        escrevenapagina(soma);
+    })
+    .catch(err =>{
+        console.log(err)
+    });
+
+//exemplo IRL: buscando info de outro servidor.
+
+//abaixo, temos uma api do navegador que serve para disparar uma requisição http em algum servidor
+//exemplo: api do github
+
+// aqui, o text() é uma promise de que vai retornar um texto!
+// fetch('http://api.github.com/users/MIYATAKR4')
+    //se usarmos o .json() ele retorna um objeto JS = mais fácil de ler
+    /* .then (response => {
+        response.json().then(body =>{
+            console.log(body);
+        })
+    }) */
+
+
+// dá pra escrever esses métodos .then de forma aninhada pra nao criar cascatas também:
+/* fetch('http://api.github.com/users/MIYATAKR4')
+    .then (response => {
+        return response.json();
+    })
+    .then (body => {
+        console.log(body);
+    })
+    .catch(err => {
+        console.log(err)
+    })
+    .finally(() => {
+        console.log('endlog')
+    }) */
+
+//também dá pra criar uma função pra executar todo esse comando.
+    //coloca async pra saber que é uma função assíncrona. Automaticamente vira uma promise.
+async function buscagit() {
+    // tenta abrir um arquivo e realiza alguma operação com o arquivo dado.
+    try{
+        const response = await fetch('http://api.github.com/users/MIYATAKR4');
+        const body = await response.json();
+
+        console.log(body);
+        return body.name;
+    } catch(err) {
+       console.log(err);
+    } finally {
+        console.log('endlog');
+    }
+};
+// para saber o nome do usuário:
+buscagit().then(name => {
+    console.log(name)
+});
