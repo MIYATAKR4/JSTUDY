@@ -267,6 +267,7 @@ escrevenapagina(mensagem) */
 const nomeUser = null;
 const mensagem = `Bem vindo ${nomeUser ?? 'Usuario(a)'}!`;
 escrevenapagina(mensagem);
+// o texto fica entre `aa` e as váriáveis em ${var}
 
 escrevenapagina("<h4>Promises</h4>");
 // 8.  é uma promessa de que algo será concluído no futuro. 
