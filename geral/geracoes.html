@@ -1,0 +1,29 @@
+// This code calculates the number of generations of people who are descendants of Portuguese colonizers.
+
+<meta charset="UTF-8"
+
+<head>
+<script>
+    function pulaLinha() {
+    document.write("<br>");
+}
+
+function show(item) {
+    document.write(item);
+    pulaLinha()
+
+}
+
+var mediaIdade = 28;
+var chegadaPT = 1500;
+var gerAtualPTBR = 2023;
+var calculo = (gerAtualPTBR - chegadaPT) / mediaIdade;
+
+X = Math.round(calculo);
+
+show("se passaram" + " " + X + " " + "gerações de brasileiros descendentes de portugueses.");
+
+
+
+</script>
+</head>
