@@ -1,4 +1,3 @@
-import './App.css';
 import study from './assets/study.jpg'
 
 function App() {
