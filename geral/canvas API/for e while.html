@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<head>
+    <title>For e While para desenhar quadrados</title>
+</head>
+
+<body>
+
+    <canvas width="600" height="600"></canvas>
+
+    <script>
+
+       function quadrado(x, y, cor) {
+            var tela = document.querySelector('canvas');
+            var pincel = tela.getContext('2d');
+
+            pincel.fillStyle = cor;
+            pincel.fillRect(x, y, 50, 50);
+            pincel.fillStroke = 'black';
+            pincel.strokeRect(x, y, 50, 50);
+       }
+
+        var x = 0;
+
+        while (x < 600) {
+            quadrado(x, 0, 'blue');
+            quadrado(x, 50, 'lightblue');
+            quadrado(x, 100, 'green');
+            quadrado(x, 150, 'lightgreen');
+            x += 50;
+        }
+
+        for(var x = 0; x < 600; x += 50) {
+            quadrado(x, 200, 'red');
+            quadrado(x, 250, 'orange');
+            quadrado(x, 300, 'yellow');
+            quadrado(x, 350, 'white');
+        }
+        
+    </script>
+
+</body>
+</html>

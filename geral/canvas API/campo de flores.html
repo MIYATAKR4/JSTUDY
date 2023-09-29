@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+    <title>Estrutura de repetição para desenhar campo de flores</title>
+</head>
+<body>
+    <canvas width="600" height="600"></canvas>
+    <script>
+        var tela = document.querySelector('canvas');
+        var pincel = tela.getContext('2d');
+        pincel.fillStyle = 'lightgreen';
+        pincel.fillRect(0, 0, 600, 400);
+        pincel.strokeStyle = 'greens';
+            pincel.strokeRect(0, 0, 600, 400);
+
+        function circulo(x, y, raio, cor){
+            pincel.fillStyle = cor;
+            pincel.beginPath();
+            pincel.arc(x, y, raio, 0, 2 * 3.14);
+            pincel.fill();
+        }
+
+        function flor(x,y){
+            circulo(x, y, 10, 'yellow');
+            circulo(x + 10, y, 10, 'yellow');
+            circulo(x + 10, y + 10, 10, 'yellow');
+            circulo(x, y + 10, 10, 'yellow');
+            circulo(x + 5, y + 5, 10, 'white');
+        }
+
+        for(var i = 20; i < 600; i += 50){
+            flor(i, 20);
+            flor(i, 90);
+            flor(i, 160);
+            flor(i, 230);
+            flor(i, 300);
+            flor(i, 370);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<head>
+    <title>Bandeira do Brasil</title>
+</head>
+
+<body>
+
+    <canvas width="600" height="600"></canvas>
+
+    <script>
+    var fundo = document.querySelector('canvas');
+    var elementos = fundo.getContext('2d');
+
+    //verde
+    elementos.fillStyle = 'darkgreen';
+    elementos.fillRect(0, 0, 600, 300);
+
+    //amarelo
+    elementos.fillStyle = 'yellow';
+    elementos.beginPath();
+    elementos.moveTo(300, 55);
+    elementos.lineTo(100, 150);
+    elementos.lineTo(500, 150);
+    elementos.fill();
+
+    elementos.fillStyle = 'yellow'; 
+    elementos.beginPath();
+    elementos.moveTo(300, 250);
+    elementos.lineTo(100, 150);
+    elementos.lineTo(500, 150);
+    elementos.fill();
+
+    //azul
+    elementos.fillStyle = 'darkblue';
+    elementos.beginPath();
+    elementos.arc(300, 150, 60, 0, 2 * 3.14);
+    elementos.fill();
+
+    //branco
+    elementos.fillStyle = 'white';
+    elementos.fillRect(240, 145, 120, 15);
+
+    </script>
+
+</body>
+</html>

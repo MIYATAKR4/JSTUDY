@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<head>
+    <title>Gráficos</title>
+</head>
+<body>
+    <canvas width="600" height="600"></canvas>
+    <script>
+       function retangulo(x, y,largura, altura, cor){
+        var tela = document.querySelector('canvas');
+        var pincel = tela.getContext('2d');
+
+        pincel.fillStyle = cor;
+        pincel.fillRect(x, y, largura, altura);
+        pincel.strokeStyle = 'black';
+        pincel.strokeRect(x, y, largura, altura);
+       }
+
+       function legenda(x, y, texto){
+        var tela = document.querySelector('canvas');
+        var pincel = tela.getContext('2d');
+
+        pincel.fillStyle = 'black';
+        pincel.font = '15px Arial';
+        pincel.fillText(texto, x, y);
+       }
+
+       var cores = ['darkblue', 'blue', 'lightblue', 'white'];
+       var series2016 = [50, 25, 20, 5];
+       var series2017 = [65, 20, 13, 2];
+
+      function barraGrafico(x, y, serie, cores){
+        var tela = document.querySelector('canvas');
+        var pincel = tela.getContext('2d');
+
+        // loop para a adição de todos os valores do array na var
+        var soma = 0;
+        for(var i = 0; i < serie.length; i++){
+            soma += serie[i];
+        }
+
+        // tamanho maximo da barra e o tamanho para cada retângulo com base no valor do array
+        var tamanhoBarra = 500;
+        var tamanhoBarraAtual = 0;
+    
+        // loop para a criação dos retângulos, calculado pela proporção dos valores do array em relação à var soma(TOTAL)
+        for(var i = 0; i < serie.length; i++){
+            tamanhoBarraAtual = tamanhoBarra * (serie[i] / soma);
+            retangulo(x, y, tamanhoBarraAtual, 50, cores[i]);
+            x += tamanhoBarraAtual;
+        }
+      }
+
+    legenda(10, 40, '2016');
+    barraGrafico(50, 50, series2016, cores);
+    legenda(10, 140, '2017')
+    barraGrafico(50, 150, series2017, cores);
+
+
+    </script>
+</body>
+</html>
