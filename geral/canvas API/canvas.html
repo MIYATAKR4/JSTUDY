@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<head>
+    <title>Canvas</title>
+</head>
+
+<body>
+
+    <canvas width="600" height="400"></canvas>
+
+    <script>
+    // uso de api: biblioteca do javascript para criação de gráficos
+    var tela = document.querySelector('canvas');
+    var pincel = tela.getContext('2d');
+        // Retângulo
+        //eixo x, eixo y, largura, altura
+        pincel.fillStyle = 'lightgreen';
+        pincel.fillRect(0, 0, 600, 400);
+
+        pincel.fillStyle = 'blue';
+        pincel.fillRect(0, 0, 200, 400);
+
+        pincel.fillStyle = 'orange';
+        pincel.fillRect(400, 0, 200, 400);
+
+        // Triângulo
+        //coordenadas de posição, pega o tamanho do canvas como ref
+        pincel.fillStyle = 'green';
+        pincel.beginPath();
+        pincel.moveTo(300, 200);
+        pincel.lineTo(200, 400);
+        pincel.lineTo(400, 400);
+        pincel.fill();
+
+        // Círculo
+        // eixo x, eixo y, tamanho inicial, tamanho final, eixo em radianos.
+        pincel.fillStyle = 'yellow';
+        pincel.beginPath();
+        pincel.arc(300, 200, 100, 0, 2 * 3.14);
+        pincel.fill();
+
+
+    </script>
+
+</body>
+</html>
