@@ -4,38 +4,101 @@
 </head>
 
 <body>
-
+    <span>Escolha uma cor: <input type="color" id="paleta" class="paleta">
+    <button id="borracha">Apagar</button>
+    </span>
+    <br>
     <canvas width="600" height="600"></canvas>
+
+    <style>
+        canvas {
+            border: 5px dotted rgb(197, 159, 201);
+        }
+        span {
+            margin: 5px;
+            font-family:'Lucida Sans', sans-serif;
+            font-size: 20px;
+            color:rgb(155, 102, 161)
+        }
+        input {
+            margin: 5px;
+            font-family:'Lucida Sans', sans-serif;
+            font-size: 20px;
+            color:rgb(155, 102, 161);
+            appearance: none;
+        }
+        button {
+            padding: 6px;
+            margin-bottom: 10px;
+            border:rgb(197, 159, 201);
+            color:rgb(133, 138, 142);
+            background-color: rgb(246, 230, 238);
+        }
+        button:hover {
+            background-color:rgb(215, 124, 169);
+            color:aliceblue;
+        }
+        .paleta {
+            padding: 6px;
+            margin-bottom: 10px;
+            border:rgb(197, 159, 201);
+            color:aliceblue;
+            background-color: rgb(246, 230, 238)
+        }
+        .paleta:hover {
+            background-color:rgb(215, 124, 169);
+            color:aliceblue;
+        }
+    </style>
 
     <script>
         var tela = document.querySelector('canvas');
         var pincel = tela.getContext('2d');
+        corFundo = 'lightgray';
         
-        pincel.fillStyle = 'lightgray';
+        pincel.fillStyle = corFundo;
         pincel.fillRect(0, 0, 600, 600); 
 
-        function desenhaCirculo(evento) {
-            var x = evento.pageX - tela.offsetLeft;
-            var y = evento.pageY - tela.offsetTop;
-            
-            let raio = 10
-            if (evento.shiftKey) {
+        var desenha = false;
+        let raio = 10
+        
+        tela.onmousemove = function (evento){
+            /* if (evento.shiftKey) {
                 raio += 20;
-            } else if (event.altKey) {
+                } else if (event.altKey) {
                 raio -= 5;
+                }  */
+
+            if (desenha) {
+                var x = evento.pageX - tela.offsetLeft;
+                var y = evento.pageY - tela.offsetTop;
+                pincel.fillStyle = paleta.value;
+                pincel.beginPath();
+                pincel.arc(x, y, raio, 0, 2 * Math.PI); 
+                pincel.fill();  
             }
-
-            pincel.fillStyle = 'red';
-            pincel.beginPath();
-            pincel.arc(x, y, raio, 0, 2 * Math.PI); 
-            pincel.fill();
-
-            console.log("posição do clique : " + x + ", " + y);
         }
 
-        tela.addEventListener('click', desenhaCirculo);
+        tela.onmousedown = function () {
+            desenha = true;
+        }
+
+        tela.onmouseup = function () {
+            desenha = false;
+        }
+
+        document.getElementById('borracha').addEventListener('click', function () {
+            if (desenha) {
+                pincel.clearRect(0, 0, tela.width, tela.height);
+                pincel.fillStyle = corFundo;
+                desenha = false;
+            } else {
+                pincel.fillStyle = corFundo;
+                pincel.fillRect(0, 0, 600, 600); 
+            }
+        })
         
-        function mudaCor(event) {
+        /* function mudaCor(event) {
             event.preventDefault();
             var x = event.pageX - tela.offsetLeft;
             var y = event.pageY - tela.offsetTop;
@@ -48,7 +111,7 @@
             pincel.fill();
         }
 
-        tela.addEventListener('contextmenu', mudaCor);
+        tela.addEventListener('contextmenu', mudaCor); */
 
     </script>
 </body>
